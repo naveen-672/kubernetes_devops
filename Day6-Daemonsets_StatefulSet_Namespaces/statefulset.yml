@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: flm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zomato
+  template:
+    metadata:
+      labels:
+        app: zomato
+    spec:
+      containers:
+        - name: cont-1
+          image: httpd
+          ports:
+            - containerPort: 80
