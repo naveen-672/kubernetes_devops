@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: agent
+spec:
+  selector:
+    matchLabels:
+      app: uber
+  template:
+    metadata:
+      labels:
+        app: uber
+    spec:
+      containers:
+        - name: cont-1
+          image: nginx
+          ports:
+            - containerPort: 80
+
