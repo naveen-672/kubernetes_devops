@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flm
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swiggy
+  template:
+    metadata:
+      labels:
+        app: swiggy
+    spec:
+      containers:
+        - name: cont1
+          image: nginx
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: devops
+              mountPath: /tmp/docker
+
+        - name: cont2
+          image: ubuntu
+          command: ["/bin/bash", "-c", "while true; do echo welcome to k8s; sleep 10; done"]
+          volumeMounts:
+            - name: devops
+              mountPath: /opt/k8s
+
+
+      volumes:
+        - name: devops
+          hostPath:
+            path: /opt/mydata
+
