@@ -1,0 +1,13 @@
+apiVersion : rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: naveen-role
+  namespace: dev
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services"]
+    verbs: ["create", "list", "get", "watch"]
+
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["create", "list", "get"]
