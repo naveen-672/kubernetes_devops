@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+spec:
+  containers:
+    - name: cont-1
+      image: nginx
+      ports:
+        - containerPort: 80
+
+      envFrom:
+        - configMapRef:
+            name: firstcm
+
+        - configMapRef:
+            name: secondcm
+
+      env:
+        - name: appData
+          valueFrom:
+            configMapKeyRef:
+              name: fourthcm
+              key: app
+
+      #if you want to pass a specific value from specific cm use above env approach - starts from -name
+      #Create container config error is caused due to passing invalid config maps or secret key refs or passing invalid       $config map or secret related values.
