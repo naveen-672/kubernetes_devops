@@ -17,6 +17,7 @@
        Stop sending          Restart container
           traffic
 
+The startup probe protects the application from being restarted too early.
 
 Easy way to remember:
 
