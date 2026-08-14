@@ -1,0 +1,28 @@
+                  Container starts
+                        │
+                        ▼
+                 Startup Probe
+                 "Have you started?"
+                        │
+                  succeeds
+                        ▼
+              ┌─────────┴─────────┐
+              ▼                   ▼
+        Readiness Probe       Liveness Probe
+        "Can you serve?"      "Are you alive?"
+              │                   │
+           fails               fails
+              │                   │
+              ▼                   ▼
+       Stop sending          Restart container
+          traffic
+
+⭐ Easy notes to remember
+
+Readiness probe passes → Pod becomes Ready → EndpointSlice marks it ready → kube-proxy/network dataplane updates routing → Service can send traffic to the Pod.
+
+Readiness probe fails → Pod becomes NotReady → it is not an eligible ready endpoint → networking stops sending normal Service traffic to it.
+
+And remember:
+
+Readiness probe does not fix the application. It only controls whether the Pod should receive traffic.
