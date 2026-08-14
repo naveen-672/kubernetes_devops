@@ -17,6 +17,24 @@
        Stop sending          Restart container
           traffic
 
+
+Easy way to remember:
+
+Startup  → "Has the application started?"
+             ↓ fails repeatedly
+          Restart container
+
+
+Liveness → "Is the application still alive?"
+             ↓ fails repeatedly
+          Restart container
+
+
+Readiness → "Can the application receive traffic?"
+             ↓ fails
+          Don't send traffic
+
+
 ⭐ Easy notes to remember
 
 Readiness probe passes → Pod becomes Ready → EndpointSlice marks it ready → kube-proxy/network dataplane updates routing → Service can send traffic to the Pod.
