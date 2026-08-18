@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-4
+  labels:
+    layer: app
+spec:
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: layer
+                operator: In
+                values:
+                  - db
+          topologyKey: kubernetes.io/hostname
+  containers:
+    - name: cont-1
+      image: nginx
+      ports:
+        - containerPort: 80
