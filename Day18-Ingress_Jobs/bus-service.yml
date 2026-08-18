@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bus-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bus
+  template:
+    metadata:
+      labels:
+        app: bus
+    spec:
+      containers:
+        - name: cont-1
+          image: naveenkumar30/paytm:bus
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bus
+spec:
+  type: ClusterIP
+  selector:
+    app: bus
+  ports:
+    - port: 80
+      targetPort: 80
